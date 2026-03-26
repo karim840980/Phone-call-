@@ -1,0 +1,17 @@
+{
+  "name": "Aman Digital Dialer Pro",
+  "short_name": "AmanDialer",
+  "description": "Professional Dialer by Aman Digital",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#f3f4f7",
+  "theme_color": "#2ecc71",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/9068/9068832.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
