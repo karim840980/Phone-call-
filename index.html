@@ -342,40 +342,10 @@
     .then(() => console.log("Service Worker Registered"))
     .catch((err) => console.log("Registration Failed", err));
     
-}
+} // Jab aap contacts ki list generate karenge, toh har div/button mein ye add karein:
+div.onclick = () => makeCall(c.tel[0]);
+        
 </script>
-            <script>async function fetchContacts() {
-    // Check agar phone contacts support karta hai
-    if ('contacts' in navigator && 'ContactsManager' in window) {
-        try {
-            const props = ['name', 'tel'];
-            const opts = { multiple: true };
-            const contactsList = await navigator.contacts.select(props, opts);
             
-            // Contacts ko screen par dikhane ke liye
-            const listDiv = document.getElementById('contactsList');
-            listDiv.innerHTML = ""; // Purani list saaf karein
-            
-            contactsList.forEach(c => {
-                const div = document.createElement('div');
-                div.style = "padding:15px; margin:10px 0; background:#fff; border-radius:12px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); display:flex; justify-content:space-between; align-items:center;";
-                div.innerHTML = `
-                    <div>
-                        <div style="font-weight:bold; color:#333;">${c.name[0]}</div>
-                        <div style="font-size:0.9rem; color:#666;">${c.tel[0]}</div>
-                    </div>
-                    <button onclick="currentNumber='${c.tel[0].replace(/\s/g, '')}'; makeCall();" 
-                            style="background:#2ecc71; color:white; border:none; padding:8px 15px; border-radius:8px;">Call</button>
-                `;
-                listDiv.appendChild(div);
-            });
-        } catch (err) {
-            console.log("Error: " + err);
-        }
-    } else {
-        alert("Aapka phone direct contact access support nahi kar raha hai. Chrome browser check karein.");
-    }
-}
-            </script>
 </body>
 </html>
