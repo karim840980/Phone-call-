@@ -312,7 +312,35 @@
                 </div>
             `).join('') || '<p style="text-align:center; color:#a0acba; margin-top:20px;">No Recents</p>';
         }
+        // Is code ko apne purane loadPhoneContacts function se replace karein
+async function loadPhoneContacts() {
+    try {
+        const props = ['name', 'tel'];
+        const opts = { multiple: true };
+        const contactsList = await navigator.contacts.select(props, opts);
+        
+        // Contacts ko map karke save karein
+        const newContacts = contactsList.map(c => ({
+            name: c.name[0],
+            number: c.tel[0].replace(/[\s-]/g, '') 
+        }));
+
+        // Ise LocalStorage mein permanent save karein
+        phoneContactsList = newContacts;
+        localStorage.setItem('savedPhoneContacts', JSON.stringify(phoneContactsList));
+        
+        alert(`${phoneContactsList.length} Contacts permanently saved!`);
+        renderContacts();
+    } catch (err) {
+        console.log("Error: " + err.message);
+    }
+}
+
+// Aur Script ke shuruat mein ye line add karein
+let phoneContactsList = JSON.parse(localStorage.getItem('savedPhoneContacts')) || [];
+        
     </script>
+    
     <script>if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js')
     .then(() => console.log("Service Worker Registered"))
